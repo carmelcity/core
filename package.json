@@ -1,6 +1,6 @@
 {
     "name": "@carmel/core",
-    "version": "1.0.0",
+    "version": "1.10.0",
     "description": "Carmel Core",
     "main": "src/index.mts",
     "type": "module",
