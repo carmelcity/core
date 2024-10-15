@@ -39,14 +39,13 @@ const parsePayload = (payload: any): EventPayload => {
     const { 
         senderId, 
         senderType, 
-        messageType, 
         timestamp,
         channel,
         type,
         data
     } = payload
 
-    if (!senderId || !senderType || !messageType || !timestamp || !channel || !type) {
+    if (!senderId || !senderType || !timestamp || !channel || !type) {
         throw new Error('Invalid payload')
     }
 
@@ -61,7 +60,6 @@ const parsePayload = (payload: any): EventPayload => {
     return {
         senderId,  
         senderType, 
-        messageType, 
         timestamp,
         channel,
         type,
@@ -77,7 +75,6 @@ const parsePayload = (payload: any): EventPayload => {
 export const onMessage = (message: any) => {
     try {
         const { detail } = message
-        const { topic } = detail 
         const dataString = new TextDecoder().decode(detail.data)
         const payloadRaw = JSON.parse(dataString)
 
@@ -89,6 +86,7 @@ export const onMessage = (message: any) => {
             return onSwarmPresence(payload)
         }
     } catch (e: any) {
+        console.log(e)
         logger(`received an invalid message: ${e.message}`)
     }
 }
