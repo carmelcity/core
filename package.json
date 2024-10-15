@@ -1,6 +1,6 @@
 {
     "name": "@carmel/core",
-    "version": "1.10.3",
+    "version": "1.10.4",
     "description": "Carmel Core",
     "main": "lib/index.mjs",
     "type": "module",

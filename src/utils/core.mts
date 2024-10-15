@@ -28,7 +28,7 @@ export const createNodeId = async () => {
  * @param func 
  * @returns 
  */
-export const logger = (msg: string, func: string = '') => msg.trim() && (func ? LOG(`[${func}]`, msg) : LOG(msg))
+export const logger = (msg: string, func: string = '') => (func ? LOG(`[${func}]`, msg) : LOG(msg))
 
 /**
  * 
