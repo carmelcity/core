@@ -1,6 +1,6 @@
-import { logger } from "../utils/index.mts"
-import { type EventPayload, EventChannel, EventType } from '../types/index.mts'
-import { updatePeer } from "./main.mts"
+import { logger } from "../utils/index.mjs"
+import { type EventPayload, EventChannel, EventType } from '../types/index.mjs'
+import { updatePeer } from "./main.mjs"
 
 /**
  * 

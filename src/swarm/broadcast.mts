@@ -1,6 +1,6 @@
-import { logger } from "../utils/index.mts"
-import { session } from '../main/index.mts'
-import { EVENTS_PREFIX, EventType } from "../types/index.mts"
+import { logger } from "../utils/index.mjs"
+import * as session from '../main/session.mjs'
+import { EVENTS_PREFIX, EventType } from "../types/index.mjs"
 
 /**
  *  

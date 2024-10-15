@@ -1,1 +1,1 @@
-export * from './main.mts'
+export * from './main.mjs'

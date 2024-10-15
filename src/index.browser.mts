@@ -1,4 +1,4 @@
-export * from './main/index.mjs'
+export * from './main/index.browser.mjs'
 export * as swarm from './swarm/index.mjs'
 export * as utils from './utils/index.mjs'
 export * as system from './system/index.mjs'

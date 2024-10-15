@@ -5,7 +5,7 @@ import { peerIdFromPrivateKey } from '@libp2p/peer-id'
 import debug from 'debug'
 
 const CARMEL_HOME = `${process.env.CARMEL_HOME}`
-const LOG = debug('carmel')
+const LOG = console.log//debug('carmel')
 
 dotenv.config({ path: path.resolve(CARMEL_HOME, '.env') })
 

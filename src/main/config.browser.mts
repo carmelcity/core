@@ -8,7 +8,7 @@ import { webRTC } from '@libp2p/webrtc'
 import { gossipsub } from '@chainsafe/libp2p-gossipsub'
 import { ping } from '@libp2p/ping'
 import { dcutr } from '@libp2p/dcutr'
-import { NodeType, type NodeConfig } from '../types/index.mts'
+import { NodeType, type NodeConfig } from '../types/index.mjs'
 import type { Libp2pOptions } from 'libp2p'
 import { IDBBlockstore } from 'blockstore-idb'
 
@@ -17,10 +17,10 @@ import { IDBBlockstore } from 'blockstore-idb'
  * @returns 
  */
 export const makeConfig = async (): Promise<NodeConfig|undefined> => {  
-  const blockstore = new IDBBlockstore()
+  // const blockstore = new IDBBlockstore()
   return {
     type: NodeType.Browser,
-    blockstore,
+    // blockstore,
     p2p: {
       start: true,
       addresses: {

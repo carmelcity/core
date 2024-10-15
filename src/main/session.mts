@@ -1,13 +1,12 @@
-import { logger } from '../utils/index.mts'
+import { logger } from '../utils/index.mjs'
 import { multiaddr } from "@multiformats/multiaddr"
-import { events } from '../swarm/index.mts'
+import { events } from '../swarm/index.mjs'
 import { createLibp2p } from 'libp2p'
-import { getRelays } from '../system/index.mts'
-import { makeConfig } from './config.mts'
+import { getRelays } from '../system/index.mjs'
 import { createHelia } from 'helia'
-import { broadcast, swarm } from '../swarm/index.mts'
-import { EventChannel, EVENTS_PREFIX, NodeType, type NodeConfig } from '../types/index.mts'
-import * as data from '../data/index.mts'
+import { broadcast, swarm } from '../swarm/index.mjs'
+import { EventChannel, EVENTS_PREFIX, NodeType, type NodeConfig } from '../types/index.mjs'
+import * as data from '../data/index.mjs'
 
 const TICK_TIME_SEC = 3
 
@@ -121,28 +120,21 @@ const startListening = () => {
  * 
  * @returns 
  */
-export const start = async () => {
-    const nodeConfig: NodeConfig | undefined = await makeConfig()
+export const start = async (config: any) => {
+    const nodeConfig: NodeConfig | undefined = await config.makeConfig()
     
     if (!nodeConfig) {
-        logger('error: could not make the config')
+        logger('Error: could not make the config')
         return 
     }
 
+    needsRelays = nodeConfig.type != NodeType.Relay
     const { blockstore, datastore } = nodeConfig
     nodeType = nodeConfig.type
 
     // start a libp2p node instance
     const libp2p: any = await createLibp2p(nodeConfig.p2p)
     peerId = `${libp2p.peerId.toString()}`
-
-    const listenAddrs = libp2p.getMultiaddrs()
-    
-    if (!listenAddrs || listenAddrs.length == 0) {
-        await libp2p.stop()
-        logger(`error: could not start the node`)
-        return 
-    }
 
     // start the helia instance
     _instance = await createHelia({
@@ -154,12 +146,8 @@ export const start = async () => {
     // listen for events
     startListening()
 
-    logger(`node started (peerId=${peerId} type=${nodeConfig.type})`)
-
-    listenAddrs.map((addr: any) => {
-        logger(`node listening on ${addr}`)
-    })
-
+    logger(`Node started (peerId=${peerId} type=${nodeConfig.type})`)
+    
     // initialize the data layer
     await data.initialize()
 
