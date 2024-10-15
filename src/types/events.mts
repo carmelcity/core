@@ -1,4 +1,4 @@
-import { type NodeType } from "./main.mts"
+import { type NodeType } from "./main.mjs"
 
 /**
  * 

@@ -1,6 +1,6 @@
 import * as Y from 'yjs'
 import { fromUint8Array } from 'js-base64'
-import { logger } from '../utils/index.mts'
+import { logger } from '../utils/index.mjs'
 
 export let instance = new Y.Doc()
 

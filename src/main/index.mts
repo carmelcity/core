@@ -1,2 +1,2 @@
-export * as config from './config.mts'
-export * as session from './session.mts'
+export * as config from './config.mjs'
+export * as session from './session.mjs'

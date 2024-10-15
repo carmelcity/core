@@ -1,15 +1,16 @@
 { 
     "ts-node": { "esm": true },
     "compilerOptions": {
-      "allowImportingTsExtensions": true,
+      "allowImportingTsExtensions": false,
       "baseUrl": ".",
       "target": "ES2022",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
+      "outDir": "lib",
       "skipLibCheck": true,
       "strict": true,
       "forceConsistentCasingInFileNames": true,
-      "noEmit": true,
+      "noEmit": false,
       "esModuleInterop": true,
       "module": "NodeNext",
       "verbatimModuleSyntax": true,

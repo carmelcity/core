@@ -1,4 +1,4 @@
-import { logger } from '../utils/index.mts'
+import { logger } from '../utils/index.mjs'
 
 export const initialize = async () => {
 }

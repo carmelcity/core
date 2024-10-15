@@ -1,2 +1,2 @@
-export * from './main.mts'
-export * from './events.mts'
+export * from './main.mjs'
+export * from './events.mjs'
