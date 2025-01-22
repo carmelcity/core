@@ -1,5 +1,3 @@
-import { type NodeType } from "./main.mjs"
-
 /**
  * 
  */
@@ -24,7 +22,7 @@ export enum EventType {
  */
 export interface EventPayload {
     senderId: string
-    senderType: NodeType
+    senderType: string
     timestamp: string
     channel: EventChannel
     type: EventType

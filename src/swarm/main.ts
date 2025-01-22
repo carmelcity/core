@@ -1,4 +1,4 @@
-import { logger } from '../utils/index.mjs'
+import { session } from '../main'
 
 /**
  * 
@@ -11,10 +11,10 @@ export let swarm: any = {}
 export const prune = async () => {
     const peerIds = Object.keys(swarm)
 
-    logger(`✓ pruned swarm (new size ${peerIds.length})`, 'swarm')
+    session.logger(`✓ pruned swarm (new size ${peerIds.length})`, 'swarm')
 
     peerIds.map((peerId: any) => {
-        logger(`  → peer ${peerId}`, 'swarm')
+       session.logger(`  → peer ${peerId}`, 'swarm')
     })
 }
 
@@ -35,7 +35,7 @@ export const getPeer = (peerId: string) => {
  */
 export const addPeer = (peerId: string, data: any = {}) => {
     if (getPeer(peerId)) {
-        logger(`${peerId} is already part of the swarm`, 'swarm')
+        session.logger(`${peerId} is already part of the swarm`, 'swarm')
         return 
     }
 
@@ -59,7 +59,7 @@ export const updatePeer = async (peerId: string, data: any = { }) => {
     const lastUpdate = `${Date.now()}`
     swarm[peerId] = { ...peer, ...data, lastUpdate }
 
-    logger(`✓ updated swarm peer ${peerId} (new swarm size: ${Object.keys(swarm).length})`, 'swarm')
+    session.logger(`✓ updated swarm peer ${peerId} (new swarm size: ${Object.keys(swarm).length})`, 'swarm')
 }
 
 /**
@@ -69,11 +69,11 @@ export const updatePeer = async (peerId: string, data: any = { }) => {
  */
 export const removePeer = (peerId: string) => {
     if (!getPeer(peerId)) {
-        logger(`${peerId} is not part of the swarm`, 'swarm')
+        session.logger(`${peerId} is not part of the swarm`, 'swarm')
         return 
     }
 
     delete swarm[peerId]
 
-    logger(`✓ removed ${peerId} from the swarm`, 'swarm')
+    session.logger(`✓ removed ${peerId} from the swarm`, 'swarm')
 }

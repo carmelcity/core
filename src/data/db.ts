@@ -1,6 +1,5 @@
 import * as Y from 'yjs'
 import { fromUint8Array } from 'js-base64'
-import { logger } from '../utils/index.mjs'
 
 export let instance = new Y.Doc()
 
@@ -12,7 +11,7 @@ export let addToCollection = async (msg: any, col: string) => {
  
     // await save()
  
-    logger(`added a new element to [${col}] (new total ${messages.length})`, 'db')
+    // logger(`added a new element to [${col}] (new total ${messages.length})`, 'db')
 }
  
 export const state = async () => {

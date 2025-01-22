@@ -1,16 +1,13 @@
-import { logger } from '../utils/index.mjs'
 import { multiaddr } from "@multiformats/multiaddr"
-import { events } from '../swarm/index.mjs'
-import { createLibp2p } from 'libp2p'
-import { getRelays } from '../system/index.mjs'
-import { createHelia } from 'helia'
-import { broadcast, swarm } from '../swarm/index.mjs'
-import { EventChannel, EVENTS_PREFIX, NodeType, type NodeConfig } from '../types/index.mjs'
-import * as data from '../data/index.mjs'
+import { events } from '../swarm'
+import { getRelays } from '../system'
+import { broadcast, swarm } from '../swarm'
+import { EventChannel, EVENTS_PREFIX } from '../types'
+import * as data from '../data'
 
 const TICK_TIME_SEC = 3
 
-let counter: number = 0
+let tick: number = 0
 let relay: any = undefined
 let _instance: any = undefined
 let needsRelays: boolean = false 
@@ -19,7 +16,12 @@ let peerId: string = ''
 /**
  * 
  */
-export let nodeType: NodeType = NodeType.Browser
+export let logger: any = undefined
+
+/**
+ * 
+ */
+export let nodeType = 'sentinel'
 
 /**
  * 
@@ -90,10 +92,10 @@ const dialRelaysIfNeeded = async () => {
  */
 const nextTick = async () => {    
     const swarmers = _instance.libp2p.services.pubsub.getSubscribers(`${EVENTS_PREFIX}:${EventChannel.Swarm}`)
-    counter++
+    tick++
 
     if (!swarmers || swarmers.length <= 0) {
-        logger('No connection yet')
+        logger(`[${tick}] no connection yet`)
         await dialRelaysIfNeeded()
         return doNextTick()
     }
@@ -120,33 +122,18 @@ const startListening = () => {
  * 
  * @returns 
  */
-export const start = async (config: any) => {
-    const nodeConfig: NodeConfig | undefined = await config.makeConfig()
-    
-    if (!nodeConfig) {
-        logger('Error: could not make the config')
-        return 
-    }
+export const start = async (instance: any, type: string, log: any) => {
+    if (_instance) return 
 
-    needsRelays = nodeConfig.type != NodeType.Relay
-    const { blockstore, datastore } = nodeConfig
-    nodeType = nodeConfig.type
-
-    // start a libp2p node instance
-    const libp2p: any = await createLibp2p(nodeConfig.p2p)
-    peerId = `${libp2p.peerId.toString()}`
-
-    // start the helia instance
-    _instance = await createHelia({
-        libp2p,
-        blockstore, 
-        datastore
-    })
+    _instance = instance
+    peerId = _instance.libp2p.peerId
+    nodeType = type
+    logger = log
 
     // listen for events
     startListening()
 
-    logger(`Node started (peerId=${peerId} type=${nodeConfig.type})`)
+    logger(`Node started (peerId=${peerId}`)
     
     // initialize the data layer
     await data.initialize()

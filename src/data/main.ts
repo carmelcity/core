@@ -1,7 +1,6 @@
-import { logger } from "../utils/index.mjs"
-import { CID } from 'multiformats/cid'
-import { dagCbor } from '@helia/dag-cbor'
-import * as core from './core.mjs'
+// import { CID } from 'multiformats/cid'
+// import { dagCbor } from '@helia/dag-cbor'
+import * as core from './core'
 // import { session } from "../main/index.mjs"
 
 // export let _dag: any = undefined
@@ -14,7 +13,7 @@ export const initialize = async () => {
 
     await core.initialize()
 
-    logger(`Initialized data ✓`)
+    // logger(`Initialized data ✓`)
 }
 
 // export const put = async (data: any) => {

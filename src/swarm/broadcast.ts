@@ -1,6 +1,5 @@
-import { logger } from "../utils/index.mjs"
-import * as session from '../main/session.mjs'
-import { EVENTS_PREFIX, EventType } from "../types/index.mjs"
+import { session } from '../main'
+import { EVENTS_PREFIX, EventType } from "../types"
 
 /**
  *  
@@ -26,7 +25,7 @@ const makePayload = (type: EventType, data: any) => {
 export const message = async (type: EventType, data: any = undefined) => {
     const payload = makePayload(type, data)
     await session.instance().libp2p.services.pubsub.publish(`${EVENTS_PREFIX}:${payload.channel}`, new TextEncoder().encode(JSON.stringify(payload)))
-    logger(`✓ broadcasted message (type=${payload.type})`)
+    session.logger(`✓ broadcasted message (type=${payload.type})`)
 }
 
 /**
