@@ -1,6 +1,6 @@
-import { logger } from "../utils/index.mjs"
-import { type EventPayload, EventChannel, EventType } from '../types/index.mjs'
-import { updatePeer } from "./main.mjs"
+import { session } from "../main"
+import { type EventPayload, EventChannel, EventType } from '../types'
+import { updatePeer } from "./main"
 
 /**
  * 
@@ -79,7 +79,7 @@ export const onMessage = (message: any) => {
         const payloadRaw = JSON.parse(dataString)
 
         const payload: EventPayload = parsePayload(payloadRaw)
-        logger(`✓ received message (type=${payload.type})`)
+        session.logger(`✓ received message (type=${payload.type})`)
 
         switch(payload.type) {
             case EventType.SwarmPresence:
@@ -87,6 +87,6 @@ export const onMessage = (message: any) => {
         }
     } catch (e: any) {
         console.log(e)
-        logger(`received an invalid message: ${e.message}`)
+        session.logger(`received an invalid message: ${e.message}`)
     }
 }

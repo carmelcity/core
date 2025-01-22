@@ -1,7 +1,7 @@
 { 
     "ts-node": { "esm": true },
     "compilerOptions": {
-      "allowImportingTsExtensions": false,
+      "allowImportingTsExtensions": true,
       "baseUrl": ".",
       "target": "ES2022",
       "lib": ["dom", "dom.iterable", "esnext"],
@@ -10,12 +10,12 @@
       "skipLibCheck": true,
       "strict": true,
       "forceConsistentCasingInFileNames": true,
-      "noEmit": false,
+      "noEmit": true,
       "esModuleInterop": true,
-      "module": "NodeNext",
       "verbatimModuleSyntax": true,
-      "moduleResolution": "NodeNext",
       "resolveJsonModule": true,
+      "module": "esnext",
+      "moduleResolution": "node",
       "isolatedModules": true,
       "jsx": "preserve",
       "incremental": true
